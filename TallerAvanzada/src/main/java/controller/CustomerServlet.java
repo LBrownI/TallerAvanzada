@@ -74,12 +74,12 @@ public class CustomerServlet extends HttpServlet {
     private void insertCustomer(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String name = request.getParameter("name");
-        String address = request.getParameter("address");
+        String country = request.getParameter("country");
         String email = request.getParameter("email");
 
         Customer newCustomer = new Customer();
         newCustomer.setName(name);
-        newCustomer.setAddress(address);
+        newCustomer.setCountry(country);
         newCustomer.setEmail(email);
 
         customerDAO.addCustomer(newCustomer);
@@ -90,13 +90,13 @@ public class CustomerServlet extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String address = request.getParameter("address");
+        String country = request.getParameter("country");
         String email = request.getParameter("email");
 
         Customer customer = new Customer();
         customer.setCustomerID(id);
         customer.setName(name);
-        customer.setAddress(address);
+        customer.setCountry(country);
         customer.setEmail(email);
 
         customerDAO.updateCustomer(customer);
