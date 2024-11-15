@@ -22,8 +22,11 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
                 Customer customer = new Customer();
                 customer.setCustomerID(rs.getInt("CustomerID"));
                 customer.setName(rs.getString("Name"));
-                customer.setAddress(rs.getString("Address"));
+                customer.setLastName(rs.getString("LastName"));
+                customer.setCountry(rs.getString("Country"));
                 customer.setEmail(rs.getString("Email"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setRegistrationDate(rs.getString("RegistrationDate"));
                 customers.add(customer);
             }
         }
@@ -45,8 +48,11 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
                     customer = new Customer();
                     customer.setCustomerID(rs.getInt("CustomerID"));
                     customer.setName(rs.getString("Name"));
-                    customer.setAddress(rs.getString("Address"));
+                    customer.setLastName(rs.getString("LastName"));
+                    customer.setCountry(rs.getString("Country"));
                     customer.setEmail(rs.getString("Email"));
+                    customer.setPhone(rs.getString("Phone"));
+                    customer.setRegistrationDate(rs.getString("RegistrationDate"));
                 }
             }
         }
@@ -56,29 +62,34 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public boolean addCustomer(Customer customer) throws SQLException {
-        String query = "INSERT INTO Customer (Name, Address, Email) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Customer (Name, LastName, Country, Email, Phone, RegistrationDate) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, customer.getName());
-            ps.setString(2, customer.getAddress());
-            ps.setString(3, customer.getEmail());
+            ps.setString(2, customer.getLastName());
+            ps.setString(3, customer.getCountry());
+            ps.setString(4, customer.getEmail());
+            ps.setString(5, customer.getPhone());
+            ps.setString(6, customer.getRegistrationDate());
             return ps.executeUpdate() > 0;
         }
     }
 
     @Override
     public boolean updateCustomer(Customer customer) throws SQLException {
-        String query = "UPDATE Customer SET Name = ?, Address = ?, Email = ? WHERE CustomerID = ?";
+        String query = "UPDATE Customer SET Name = ?, LastName = ?, Country = ?, Email = ?, Phone = ?,  WHERE CustomerID = ?";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, customer.getName());
-            ps.setString(2, customer.getAddress());
-            ps.setString(3, customer.getEmail());
-            ps.setInt(4, customer.getCustomerID());
+            ps.setString(2, customer.getLastName());
+            ps.setString(3, customer.getCountry());
+            ps.setString(4, customer.getEmail());
+            ps.setString(5, customer.getPhone());
+            ps.setInt(6, customer.getCustomerID());
             return ps.executeUpdate() > 0;
         }
     }
