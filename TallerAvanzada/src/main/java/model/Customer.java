@@ -3,8 +3,11 @@ package model;
 public class Customer {
     private int customerID;
     private String name;
-    private String address;
+    private String country;
     private String email;
+    private String lastName;
+    private String phone;
+    private String registrationdate;
 
     // Getters and Setters
     public int getCustomerID() {
@@ -22,13 +25,13 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getAddress() {
-        return address;
+    
+    public String getLastName() { 
+        return lastName; 
     }
-
-    public void setAddress(String address) {
-        this.address = address;
+    
+    public void setLastName(String lastName) { 
+        this.lastName = lastName; 
     }
 
     public String getEmail() {
@@ -37,5 +40,29 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public String getPhone(){
+        return phone;
+    }
+    
+    public void setPhone(String phone){
+        this.phone= phone;
+    }
+    
+    public String getRegistrationDate(){
+        return registrationdate;
+    }
+    
+    public void setRegistrationDate(String registrationdate){
+        this.registrationdate= registrationdate;
     }
 }
