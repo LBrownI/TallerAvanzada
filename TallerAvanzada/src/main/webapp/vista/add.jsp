@@ -1,35 +1,33 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>${customer != null ? "Edit Customer" : "Add Customer"}</title>
-</head>
-<body>
-    <h1>${customer != null ? "Edit Customer" : "Add Customer"}</h1>
-    
-    <form action="CustomerServlet?action=${customer != null ? 'update' : 'insert'}" method="post">
-        <input type="hidden" name="id" value="${customer.customerID}">
-        
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="${customer.name}" required><br>
-        
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="${customer.address}" required><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="${customer.email}" required><br>
-        
-        <button type="submit">${customer != null ? "Update" : "Add"} Customer</button>
-    </form>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.Customer" %>
 
-    <!-- Only show the delete button if editing an existing customer -->
-    <c:if test="${customer != null}">
-        <form action="CustomerServlet?action=delete" method="post" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="${customer.customerID}">
-            <button type="submit" style="background-color: red; color: white;">Delete Customer</button>
-        </form>
-    </c:if>
+<%
+    // Asumiendo que pasaste el objeto "customer" como un atributo de request
+    Customer customer = (Customer) request.getAttribute("customer");
+    String action = (customer != null) ? "update" : "insert";
+    String buttonLabel = (customer != null) ? "Update" : "Add";
+%>
 
-    <a href="CustomerServlet">Back to Customer List</a>
-</body>
-</html>
+<form action="CustomerServlet?action=<%= action %>" method="post">
+    <input type="hidden" name="id" value="<%= (customer != null) ? customer.getCustomerID() : "" %>">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= (customer != null) ? customer.getName() : "" %>" required><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" value="<%= (customer != null) ? customer.getLastName() : "" %>" required><br>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country" value="<%= (customer != null) ? customer.getCountry() : "" %>" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<%= (customer != null) ? customer.getEmail() : "" %>" required><br>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" value="<%= (customer != null) ? customer.getPhone() : "" %>" required><br>
+
+    <label for="registrationdate">Registration Date:</label>
+    <input type="text" id="registrationdate" name="registrationdate" value="<%= (customer != null) ? customer.getRegistrationDate() : "" %>"><br>
+
+    <button type="submit"><%= buttonLabel %> Customer</button>
+</form>

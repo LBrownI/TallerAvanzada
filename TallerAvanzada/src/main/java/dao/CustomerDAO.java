@@ -20,7 +20,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
             while (rs.next()) {
                 Customer customer = new Customer();
-                customer.setCustomerID(rs.getInt("CustomerID"));
+                customer.setCustomerID(rs.getInt("Id"));
                 customer.setName(rs.getString("FirstName"));
                 customer.setLastName(rs.getString("LastName"));
                 customer.setCountry(rs.getString("Country"));
@@ -36,7 +36,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public Customer getCustomerById(int id) throws SQLException {
-        String query = "SELECT * FROM Customer WHERE CustomerID = ?";
+        String query = "SELECT * FROM Customer WHERE Id = ?";
         Customer customer = null;
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
@@ -46,7 +46,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     customer = new Customer();
-                    customer.setCustomerID(rs.getInt("CustomerID"));
+                    customer.setCustomerID(rs.getInt("Id"));
                     customer.setName(rs.getString("FirstName"));
                     customer.setLastName(rs.getString("LastName"));
                     customer.setCountry(rs.getString("Country"));
@@ -79,7 +79,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public boolean updateCustomer(Customer customer) throws SQLException {
-        String query = "UPDATE Customer SET FirstName = ?, LastName = ?, Country = ?, Email = ?, Phone = ?,  WHERE CustomerID = ?";
+        String query = "UPDATE Customer SET FirstName = ?, LastName = ?, Country = ?, Email = ?, Phone = ?  WHERE Id = ?";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
@@ -96,7 +96,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public boolean deleteCustomer(int id) throws SQLException {
-        String query = "DELETE FROM Customer WHERE CustomerID = ?";
+        String query = "DELETE FROM Customer WHERE Id = ?";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
