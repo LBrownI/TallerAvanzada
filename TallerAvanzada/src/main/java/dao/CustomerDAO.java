@@ -21,7 +21,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
             while (rs.next()) {
                 Customer customer = new Customer();
                 customer.setCustomerID(rs.getInt("CustomerID"));
-                customer.setName(rs.getString("Name"));
+                customer.setName(rs.getString("FirstName"));
                 customer.setLastName(rs.getString("LastName"));
                 customer.setCountry(rs.getString("Country"));
                 customer.setEmail(rs.getString("Email"));
@@ -47,7 +47,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
                 if (rs.next()) {
                     customer = new Customer();
                     customer.setCustomerID(rs.getInt("CustomerID"));
-                    customer.setName(rs.getString("Name"));
+                    customer.setName(rs.getString("FirstName"));
                     customer.setLastName(rs.getString("LastName"));
                     customer.setCountry(rs.getString("Country"));
                     customer.setEmail(rs.getString("Email"));
@@ -62,7 +62,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public boolean addCustomer(Customer customer) throws SQLException {
-        String query = "INSERT INTO Customer (Name, LastName, Country, Email, Phone, RegistrationDate) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Customer (FirstName, LastName, Country, Email, Phone, RegistrationDate) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
@@ -79,7 +79,7 @@ public class CustomerDAO implements CustomerInterface { // No longer abstract
 
     @Override
     public boolean updateCustomer(Customer customer) throws SQLException {
-        String query = "UPDATE Customer SET Name = ?, LastName = ?, Country = ?, Email = ?, Phone = ?,  WHERE CustomerID = ?";
+        String query = "UPDATE Customer SET FirstName = ?, LastName = ?, Country = ?, Email = ?, Phone = ?,  WHERE CustomerID = ?";
 
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
