@@ -1,0 +1,7 @@
+dao\CustomerInterface.class
+controller\CustomerServlet.class
+cl\uss\tareas\resources\JakartaEE8Resource.class
+dao\CustomerDAO.class
+cl\uss\tareas\JakartaRestConfiguration.class
+utility\ConnectionDB.class
+model\Customer.class
